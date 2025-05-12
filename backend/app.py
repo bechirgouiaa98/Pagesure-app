@@ -1,44 +1,21 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import requests
-from bs4 import BeautifulSoup
-import re
-import time
+from apify_client import ApifyClient
+import os
 
 app = Flask(__name__)
 CORS(app, origins=['https://pagesure-frontend-app.onrender.com'])
 
-SCRAPERAPI_KEY = "7b1303de5020c81ea379b846702da268"  # For production, use an environment variable
+APIFY_TOKEN = os.environ.get("APIFY_TOKEN") or "YOUR_APIFY_TOKEN"  # Replace with your token or set in Render
+TASK_ID = "bechir.gouiaa98/facebook-scraper-task"
 
 def scrape_facebook_data(url):
-    print(f"[DEBUG] Scraping Facebook URL: {url}")
-    api_url = f"https://api.scraperapi.com/?api_key={SCRAPERAPI_KEY}&url={url}"
-    print(f"[DEBUG] ScraperAPI request: {api_url}")
-    response = requests.get(api_url)
-    response.raise_for_status()
-    html = response.text
-
-    soup = BeautifulSoup(html, 'html.parser')
-
-    # Logo image (SVG or image tag)
-    logo_img = soup.select_one('image')
-    # Followers
-    followers_tag = soup.find('a', string=re.compile(r' followers$'))
-    # Page name (from <title>)
-    title_tag = soup.find('title')
-    page_name = "N/A"
-    if title_tag:
-        title_text = title_tag.text.strip()
-        title_text = re.split(r'\||-', title_text)[0].strip()
-        title_text = title_text.replace('Facebook', '').strip()
-        page_name = title_text
-
-    data = {
-        "logo_image": logo_img['xlink:href'] if logo_img else None,
-        "page_name": page_name,
-        "followers": followers_tag.get_text() if followers_tag else "N/A"
-    }
-    return data
+    client = ApifyClient(APIFY_TOKEN)
+    run = client.task(TASK_ID).call(input={"startUrls": [{"url": url}]})
+    items = list(client.dataset(run["defaultDatasetId"]).iterate_items())
+    if not items:
+        return {"error": "No data found"}
+    return items[0]
 
 @app.route('/api/scrape', methods=['POST'])
 def scrape():
