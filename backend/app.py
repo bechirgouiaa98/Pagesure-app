@@ -6,7 +6,6 @@ import re
 import time
 
 app = Flask(__name__)
-app = Flask(__name__)
 CORS(app, origins=['https://pagesure-frontend-app.onrender.com'])
 
 def scrape_facebook_data(url):
