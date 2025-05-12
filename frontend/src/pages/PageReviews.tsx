@@ -322,16 +322,16 @@ const PageReviews = () => {
             />
             <Box>
               <Typography variant="h3" sx={{ fontWeight: 900, mb: 0.5, letterSpacing: 0.5, color: '#10B981', fontSize: { xs: 28, md: 38 } }}>
-                {pageData.title && pageData.title.split(' ')[0]}
+                {pageData.title}
               </Typography>
               <Typography variant="subtitle1" sx={{ fontSize: 18, fontWeight: 500, color: '#1F2937', mt: 0.5 }}>
                 {typeof pageData.likes === 'number' && `Likes ${formatNumber(pageData.likes)}`}
                 {typeof pageData.likes === 'number' && typeof pageData.followers === 'number' && ' • '}
                 {typeof pageData.followers === 'number' && `Followers ${formatNumber(pageData.followers)}`}
               </Typography>
-              {Array.isArray(pageData.categories) && pageData.categories.length > 0 && (
+              {Array.isArray(pageData.categories) && pageData.categories.length > 1 && (
                 <Typography variant="subtitle2" sx={{ fontSize: 16, fontWeight: 400, color: '#6B7280', mt: 0.5 }}>
-                  Category: {pageData.categories[0]}
+                  Category: {pageData.categories[1]}
                 </Typography>
               )}
             </Box>
