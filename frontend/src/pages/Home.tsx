@@ -78,14 +78,7 @@ const Home = () => {
         if (!response.ok) throw new Error('Erreur lors de l\'analyse de la page');
         pageData = await response.json();
 
-        const filteredPageData = {
-          profilePictureUrl: pageData.profilePictureUrl,
-          title: pageData.title,
-          followers: pageData.followers,
-          likes: pageData.likes,
-          categories: pageData.categories,
-        };
-        await setDoc(pageRef, filteredPageData);
+        await setDoc(pageRef, pageData);
       }
 
       navigate(`/page/${pageId}`, { state: { pageData } });
