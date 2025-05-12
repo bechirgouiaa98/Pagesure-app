@@ -53,6 +53,9 @@ def scrape():
         data = scrape_facebook_data(url)
         return jsonify(data)
     except Exception as e:
+        import traceback
+        print('--- Exception in /api/scrape ---')
+        print(traceback.format_exc())
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
