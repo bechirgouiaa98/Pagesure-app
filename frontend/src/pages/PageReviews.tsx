@@ -112,6 +112,13 @@ function getStarColor(rating: number) {
   return '#EF4444'; // Mauvais
 }
 
+// Add this helper function after imports
+function formatNumber(n: number) {
+  if (n >= 1_000_000) return (n / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M';
+  if (n >= 1_000) return (n / 1_000).toFixed(1).replace(/\.0$/, '') + 'k';
+  return n.toString();
+}
+
 const PageReviews = () => {
   const { pageId } = useParams<{ pageId: string }>();
   const location = useLocation();
@@ -317,18 +324,16 @@ const PageReviews = () => {
               <Typography variant="h3" sx={{ fontWeight: 900, mb: 0.5, letterSpacing: 0.5, color: '#10B981', fontSize: { xs: 28, md: 38 } }}>
                 {pageData.title && pageData.title.split(' ')[0]}
               </Typography>
-              <Box display="flex" gap={2} alignItems="center">
-                {typeof pageData.likes === 'number' && (
-                  <Typography variant="subtitle1" sx={{ fontSize: 18, fontWeight: 500, color: '#1F2937' }}>
-                    👍 {pageData.likes.toLocaleString()} J'aime
-                  </Typography>
-                )}
-                {typeof pageData.followers === 'number' && (
-                  <Typography variant="subtitle1" sx={{ fontSize: 18, fontWeight: 500, color: '#1F2937' }}>
-                    👥 {pageData.followers.toLocaleString()} abonnés
-                  </Typography>
-                )}
-              </Box>
+              <Typography variant="subtitle1" sx={{ fontSize: 18, fontWeight: 500, color: '#1F2937', mt: 0.5 }}>
+                {typeof pageData.likes === 'number' && `Likes ${formatNumber(pageData.likes)}`}
+                {typeof pageData.likes === 'number' && typeof pageData.followers === 'number' && ' • '}
+                {typeof pageData.followers === 'number' && `Followers ${formatNumber(pageData.followers)}`}
+              </Typography>
+              {Array.isArray(pageData.categories) && pageData.categories.length > 0 && (
+                <Typography variant="subtitle2" sx={{ fontSize: 16, fontWeight: 400, color: '#6B7280', mt: 0.5 }}>
+                  Category: {pageData.categories[0]}
+                </Typography>
+              )}
             </Box>
           </Box>
         </Grid>
