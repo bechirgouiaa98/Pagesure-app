@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from playwright.sync_api import sync_playwright
+import requests
 from bs4 import BeautifulSoup
 import re
 import time
@@ -8,39 +8,35 @@ import time
 app = Flask(__name__)
 CORS(app, origins=['https://pagesure-frontend-app.onrender.com'])
 
+SCRAPERAPI_KEY = "7b1303de5020c81ea379b846702da268"  # For production, use an environment variable
+
 def scrape_facebook_data(url):
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True, args=["--disable-dev-shm-usage", "--no-sandbox"])
-        context = browser.new_context()
-        page = context.new_page()
-        page.goto(url)
-        time.sleep(3)
+    api_url = f"https://api.scraperapi.com/?api_key={SCRAPERAPI_KEY}&url={url}"
+    response = requests.get(api_url)
+    response.raise_for_status()
+    html = response.text
 
-        soup = BeautifulSoup(page.content(), 'html.parser')
+    soup = BeautifulSoup(html, 'html.parser')
 
-        # Logo image (SVG or image tag)
-        logo_img = soup.select_one('image')
-        # Followers
-        followers_tag = soup.find('a', string=re.compile(r' followers$'))
-        # Page name (from <title>)
-        title_tag = soup.find('title')
-        page_name = "N/A"
-        if title_tag:
-            # Remove 'Facebook' and anything after '|' or '-'
-            title_text = title_tag.text.strip()
-            # Remove 'Facebook' and split on '|' or '-'
-            title_text = re.split(r'\||-', title_text)[0].strip()
-            title_text = title_text.replace('Facebook', '').strip()
-            page_name = title_text
+    # Logo image (SVG or image tag)
+    logo_img = soup.select_one('image')
+    # Followers
+    followers_tag = soup.find('a', string=re.compile(r' followers$'))
+    # Page name (from <title>)
+    title_tag = soup.find('title')
+    page_name = "N/A"
+    if title_tag:
+        title_text = title_tag.text.strip()
+        title_text = re.split(r'\||-', title_text)[0].strip()
+        title_text = title_text.replace('Facebook', '').strip()
+        page_name = title_text
 
-        data = {
-            "logo_image": logo_img['xlink:href'] if logo_img else None,
-            "page_name": page_name,
-            "followers": followers_tag.get_text() if followers_tag else "N/A"
-        }
-
-        browser.close()
-        return data
+    data = {
+        "logo_image": logo_img['xlink:href'] if logo_img else None,
+        "page_name": page_name,
+        "followers": followers_tag.get_text() if followers_tag else "N/A"
+    }
+    return data
 
 @app.route('/api/scrape', methods=['POST'])
 def scrape():
