@@ -10,7 +10,7 @@ CORS(app, origins=['https://pagesure-frontend-app.onrender.com'])
 
 def scrape_facebook_data(url):
     with sync_playwright() as p:
-        browser = p.chromium.launch(headless=True)
+        browser = p.chromium.launch(headless=True, args=["--disable-dev-shm-usage", "--no-sandbox"])
         context = browser.new_context()
         page = context.new_page()
         page.goto(url)
