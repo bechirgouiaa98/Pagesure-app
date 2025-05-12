@@ -23,7 +23,19 @@ const Home = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
+const extractPageId = (url: string) => {
+    const match = url.match(/facebook\.com\/(.+)/);
+    if (!match) return null;
+    let path = match[1].split('?')[0];
+    // For profile.php?id=... URLs, use the id as the pageId
+    if (path === 'profile.php') {
+      const idMatch = url.match(/[?&]id=(\d+)/);
+      if (idMatch) return `profile_${idMatch[1]}`;
+      return 'profile.php'; // fallback
+    }
+    // For normal pages, use the path (e.g., page name)
+    return path.replace(/\/$/, ''); // remove trailing slash
+  };
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -42,7 +54,12 @@ const Home = () => {
     }
 
     try {
-      const pageId = url.split('facebook.com/')[1].split('?')[0];
+      const pageId = extractPageId(url);
+      if (!pageId) {
+        setError('Impossible d\'extraire l\'identifiant de la page Facebook');
+        setLoading(false);
+        return;
+      }
       const pageRef = doc(db, 'pages', pageId);
       const pageSnap = await getDoc(pageRef);
 
