@@ -36,11 +36,34 @@ import StarHalfIcon from '@mui/icons-material/StarHalf';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 
 interface PageData {
-  cover_image: string;
-  logo_image: string;
-  page_name: string;
-  likes: string;
-  followers: string;
+  facebookUrl: string;
+  categories: string[];
+  info: string[];
+  likes: number;
+  messenger: string | null;
+  title: string;
+  pageId: string;
+  pageName: string;
+  pageUrl: string;
+  intro: string;
+  websites: string[];
+  email?: string;
+  website?: string;
+  followers: number;
+  profilePictureUrl: string;
+  coverPhotoUrl: string;
+  profilePhoto?: string;
+  creation_date?: string;
+  ad_status?: string;
+  about_me?: { text: string; urls: string[] };
+  facebookId?: string;
+  pageAdLibrary?: any;
+  address?: string;
+  phone?: string;
+  rating?: string;
+  ratingOverall?: number;
+  ratingCount?: number;
+  confirmed_owner?: string;
 }
 
 interface Review {
@@ -120,14 +143,14 @@ const PageReviews = () => {
         let pageDataFromState = state?.pageData;
         let finalPageData = pageDataFromState;
         // Fallback: fetch from Firestore if missing or missing fields
-        if (!finalPageData || !finalPageData.page_name || !finalPageData.followers) {
+        if (!finalPageData || !finalPageData.title || !finalPageData.followers) {
           const pageRef = doc(db, 'pages', String(pageId));
           const pageSnap = await getDoc(pageRef);
           if (pageSnap.exists()) {
             finalPageData = { ...finalPageData, ...pageSnap.data() };
           }
         }
-        if (finalPageData && finalPageData.page_name) {
+        if (finalPageData && finalPageData.title) {
           setPageData(finalPageData as PageData);
         } else {
           // Si pas de données dans l'état ni Firestore, rediriger vers la page d'accueil
@@ -188,8 +211,8 @@ const PageReviews = () => {
     try {
       const reviewData = {
         pageId,
-        pageLogo: pageData.logo_image,
-        pageName: pageData.page_name,
+        pageLogo: pageData.profilePictureUrl,
+        pageName: pageData.title,
         userId: user.uid,
         userName: user.displayName,
         userPhoto: user.photoURL,
@@ -286,13 +309,13 @@ const PageReviews = () => {
         <Grid item xs={12} md={7}>
           <Box display="flex" alignItems="center" gap={3}>
             <Avatar
-              src={pageData.logo_image || undefined}
-              alt={pageData.page_name}
+              src={pageData.profilePictureUrl || undefined}
+              alt={pageData.title}
               sx={{ width: 96, height: 96, boxShadow: 4, border: '5px solid #fff', background: '#fff', borderRadius: 4 }}
             />
             <Box>
               <Typography variant="h3" sx={{ fontWeight: 900, mb: 0.5, letterSpacing: 0.5, color: '#10B981', fontSize: { xs: 28, md: 38 } }}>
-                {pageData.page_name}
+                {pageData.title}
               </Typography>
               {pageData.followers && (
                 <Typography variant="subtitle1" sx={{ fontSize: 18, fontWeight: 500, color: '#1F2937' }}>
