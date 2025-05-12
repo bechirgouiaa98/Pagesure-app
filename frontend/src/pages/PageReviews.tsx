@@ -315,13 +315,20 @@ const PageReviews = () => {
             />
             <Box>
               <Typography variant="h3" sx={{ fontWeight: 900, mb: 0.5, letterSpacing: 0.5, color: '#10B981', fontSize: { xs: 28, md: 38 } }}>
-                {pageData.title}
+                {pageData.title && pageData.title.split(' ')[0]}
               </Typography>
-              {pageData.followers && (
-                <Typography variant="subtitle1" sx={{ fontSize: 18, fontWeight: 500, color: '#1F2937' }}>
-                  {pageData.followers}
-                </Typography>
-              )}
+              <Box display="flex" gap={2} alignItems="center">
+                {typeof pageData.likes === 'number' && (
+                  <Typography variant="subtitle1" sx={{ fontSize: 18, fontWeight: 500, color: '#1F2937' }}>
+                    👍 {pageData.likes.toLocaleString()} J'aime
+                  </Typography>
+                )}
+                {typeof pageData.followers === 'number' && (
+                  <Typography variant="subtitle1" sx={{ fontSize: 18, fontWeight: 500, color: '#1F2937' }}>
+                    👥 {pageData.followers.toLocaleString()} abonnés
+                  </Typography>
+                )}
+              </Box>
             </Box>
           </Box>
         </Grid>
