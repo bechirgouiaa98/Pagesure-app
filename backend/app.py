@@ -11,7 +11,9 @@ CORS(app, origins=['https://pagesure-frontend-app.onrender.com'])
 SCRAPERAPI_KEY = "7b1303de5020c81ea379b846702da268"  # For production, use an environment variable
 
 def scrape_facebook_data(url):
+    print(f"[DEBUG] Scraping Facebook URL: {url}")
     api_url = f"https://api.scraperapi.com/?api_key={SCRAPERAPI_KEY}&url={url}"
+    print(f"[DEBUG] ScraperAPI request: {api_url}")
     response = requests.get(api_url)
     response.raise_for_status()
     html = response.text
