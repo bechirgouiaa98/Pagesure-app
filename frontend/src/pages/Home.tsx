@@ -23,7 +23,8 @@ const Home = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-const extractPageId = (url: string) => {
+
+  const extractPageId = (url: string) => {
     const match = url.match(/facebook\.com\/(.+)/);
     if (!match) return null;
     let path = match[1].split('?')[0];
@@ -36,6 +37,7 @@ const extractPageId = (url: string) => {
     // For normal pages, use the path (e.g., page name)
     return path.replace(/\/$/, ''); // remove trailing slash
   };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -76,7 +78,14 @@ const extractPageId = (url: string) => {
         if (!response.ok) throw new Error('Erreur lors de l\'analyse de la page');
         pageData = await response.json();
 
-        await setDoc(pageRef, pageData);
+        const filteredPageData = {
+          profilePictureUrl: pageData.profilePictureUrl,
+          title: pageData.title,
+          followers: pageData.followers,
+          likes: pageData.likes,
+          categories: pageData.categories,
+        };
+        await setDoc(pageRef, filteredPageData);
       }
 
       navigate(`/page/${pageId}`, { state: { pageData } });
