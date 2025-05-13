@@ -312,48 +312,49 @@ const PageReviews = () => {
     <Container maxWidth="lg" sx={{ py: { xs: 2, md: 5 } }}>
       {/* Header Trustpilot style modernisé */}
       <Grid container spacing={3} alignItems="center" sx={{ mb: 4, flexWrap: 'wrap' }}>
-        {/* Left: Profile info vertical */}
+        {/* Left: Profile info vertical, stack on mobile */}
         <Grid item xs={12} md={7}>
-          <Box display="flex" alignItems="center" gap={3}>
+          <Box display="flex" alignItems="center" gap={3} flexDirection={{ xs: 'column', md: 'row' }}>
             <Avatar
               src={pageData.profilePictureUrl || undefined}
               alt={pageData.title}
-              sx={{ width: 96, height: 96, boxShadow: 4, border: '5px solid #fff', background: '#fff', borderRadius: 4 }}
+              sx={{ width: { xs: 72, md: 96 }, height: { xs: 72, md: 96 }, boxShadow: 4, border: '5px solid #fff', background: '#fff', borderRadius: 4, mb: { xs: 1, md: 0 } }}
             />
-            <Box>
-              <Typography variant="h3" sx={{ fontWeight: 900, mb: 0.5, letterSpacing: 0.5, color: '#10B981', fontSize: { xs: 28, md: 38 } }}>
+            <Box textAlign={{ xs: 'center', md: 'left' }}>
+              <Typography variant="h3" sx={{ fontWeight: 900, mb: 0.5, letterSpacing: 0.5, color: '#10B981', fontSize: { xs: 22, md: 38 } }}>
                 {pageData.title}
               </Typography>
-              <Typography variant="subtitle1" sx={{ fontSize: 18, fontWeight: 500, color: '#1F2937', mt: 0.5 }}>
+              <Typography variant="subtitle1" sx={{ fontSize: { xs: 15, md: 18 }, fontWeight: 500, color: '#1F2937', mt: 0.5 }}>
                 {typeof pageData.likes === 'number' && `Likes ${formatNumber(pageData.likes)}`}
                 {typeof pageData.likes === 'number' && typeof pageData.followers === 'number' && ' • '}
                 {typeof pageData.followers === 'number' && `Followers ${formatNumber(pageData.followers)}`}
               </Typography>
               {Array.isArray(pageData.categories) && pageData.categories.length > 1 && (
-                <Typography variant="subtitle2" sx={{ fontSize: 16, fontWeight: 400, color: '#6B7280', mt: 0.5 }}>
+                <Typography variant="subtitle2" sx={{ fontSize: { xs: 14, md: 16 }, fontWeight: 400, color: '#6B7280', mt: 0.5 }}>
                   Category: {pageData.categories[1]}
                 </Typography>
               )}
             </Box>
           </Box>
         </Grid>
-        {/* Right: Modern summary card */}
+        {/* Right: Modern summary card, full width on mobile */}
         <Grid item xs={12} md={5}>
           <Paper elevation={0} sx={{
-            p: 3,
+            p: { xs: 2, md: 3 },
             borderRadius: 4,
-            minWidth: 260,
+            minWidth: 220,
             maxWidth: 350,
-            mx: 'auto',
+            mx: { xs: 0, md: 'auto' },
             boxShadow: '0 8px 32px rgba(16,185,129,0.12)',
             background: 'linear-gradient(135deg, #FFFFFF 80%, #F3F4F6 100%)',
             textAlign: 'center',
+            width: { xs: '100%', md: 'auto' },
           }}>
-            <Typography variant="h6" sx={{ mb: 1, fontWeight: 700, color: '#1F2937', fontSize: 20 }}>
+            <Typography variant="h6" sx={{ mb: 1, fontWeight: 700, color: '#1F2937', fontSize: { xs: 17, md: 20 } }}>
               Avis globaux
             </Typography>
             <Box display="flex" alignItems="center" justifyContent="center" sx={{ mb: 1 }}>
-              <Typography variant="h2" sx={{ fontWeight: 800, mr: 1, color: badge.color, lineHeight: 1, fontSize: 38 }}>
+              <Typography variant="h2" sx={{ fontWeight: 800, mr: 1, color: badge.color, lineHeight: 1, fontSize: { xs: 28, md: 38 } }}>
                 {averageRating.toFixed(1)}
               </Typography>
               <Rating
@@ -361,7 +362,7 @@ const PageReviews = () => {
                 precision={0.5}
                 readOnly
                 size="large"
-                sx={{ mr: 1, color: badge.color, fontSize: 32 }}
+                sx={{ mr: 1, color: badge.color, fontSize: { xs: 22, md: 32 } }}
               />
             </Box>
             <Box display="flex" alignItems="center" justifyContent="center" gap={1} sx={{ mb: 2 }}>
@@ -372,12 +373,12 @@ const PageReviews = () => {
                 py: 0.5,
                 borderRadius: 2,
                 fontWeight: 700,
-                fontSize: 15,
+                fontSize: { xs: 13, md: 15 },
                 letterSpacing: 0.5,
-                minWidth: 80,
+                minWidth: 70,
                 textAlign: 'center',
               }}>{badge.label}</Box>
-              <Typography variant="body2" color="text.secondary" sx={{ fontSize: 15, color: '#1F2937' }}>
+              <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: 13, md: 15 }, color: '#1F2937' }}>
                 {totalReviews} avis
               </Typography>
             </Box>
@@ -385,8 +386,8 @@ const PageReviews = () => {
             <Box sx={{ mt: 1 }}>
               {[5, 4, 3, 2, 1].map(star => (
                 <Box key={star} display="flex" alignItems="center" sx={{ mb: 1 }}>
-                  <Typography sx={{ width: 38, fontSize: 15, color: '#1F2937' }}>{star}★</Typography>
-                  <Box sx={{ flex: 1, mx: 1, height: 16, bgcolor: '#F3F4F6', borderRadius: 8, overflow: 'hidden', position: 'relative' }}>
+                  <Typography sx={{ width: 30, fontSize: { xs: 13, md: 15 }, color: '#1F2937' }}>{star}★</Typography>
+                  <Box sx={{ flex: 1, mx: 1, height: 12, bgcolor: '#F3F4F6', borderRadius: 8, overflow: 'hidden', position: 'relative' }}>
                     <Box
                       sx={{
                         width: `${totalReviews ? (starCounts[star - 1] / totalReviews) * 100 : 0}%`,
@@ -402,7 +403,7 @@ const PageReviews = () => {
                       }}
                     />
                   </Box>
-                  <Typography sx={{ width: 32, fontSize: 15, textAlign: 'right', color: '#1F2937' }}>{starCounts[star - 1]}</Typography>
+                  <Typography sx={{ width: 24, fontSize: { xs: 13, md: 15 }, textAlign: 'right', color: '#1F2937' }}>{starCounts[star - 1]}</Typography>
                 </Box>
               ))}
             </Box>
