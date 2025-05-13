@@ -15,6 +15,9 @@ import {
 import SearchIcon from '@mui/icons-material/Search';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../firebase';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import GroupsIcon from '@mui/icons-material/Groups';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 
 const Home = () => {
   const [url, setUrl] = useState('');
@@ -91,201 +94,114 @@ const Home = () => {
   };
 
   return (
-    <Box sx={{ bgcolor: '#FFFFFF', minHeight: '100vh', pb: 8 }}>
-      {/* Hero Section */}
-      <Box
-        sx={{
-          bgcolor: '#FFFFFF',
-          py: { xs: 4, md: 12 },
-          mb: { xs: 1, md: 4 },
-          borderRadius: 0,
-          boxShadow: '0 2px 16px rgba(16,185,129,0.07)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          px: { xs: 1, md: 0 },
-        }}
-      >
-        <Container maxWidth="sm" sx={{ textAlign: 'center', px: { xs: 0.5, md: 0 } }}>
-          <Typography
-            variant="h1"
-            component="h1"
-            gutterBottom
-            sx={{
-              fontWeight: 900,
-              fontSize: { xs: '2.1rem', md: '3.8rem' },
-              letterSpacing: 0.5,
-              mb: 2,
-              color: '#1F2937',
-              lineHeight: 1.13,
-            }}
-          >
-            Trouvez une page Facebook fiable
-          </Typography>
-          <Typography
-            variant="h5"
-            sx={{ mb: 4, color: '#10B981', fontWeight: 400, fontSize: { xs: 16, md: 24 }, opacity: 0.95, lineHeight: 1.4 }}
-          >
-            la référence des avis sur les pages Facebook
-          </Typography>
-          <Paper
-            elevation={0}
-            sx={{
-              p: 0.5,
-              borderRadius: 8,
-              boxShadow: '0 4px 24px rgba(16,185,129,0.10)',
-              background: '#FFFFFF',
-              maxWidth: 700,
-              mx: 'auto',
-              mb: 2,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: { xs: '100%', md: 500 },
-            }}
-          >
-            <form onSubmit={handleSubmit} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}>
-              <TextField
-                fullWidth
-                variant="outlined"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                error={!!error}
-                helperText={error}
-                placeholder="Rechercher une page Facebook…"
-                sx={{
-                  bgcolor: '#FFFFFF',
+    <Box
+      sx={{
+        bgcolor: '#F7F8FA',
+        py: { xs: 4, md: 10 },
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        px: { xs: 1, md: 0 },
+      }}
+    >
+      <Container maxWidth="sm" sx={{ textAlign: 'center', px: { xs: 0.5, md: 0 } }}>
+        <Paper
+          elevation={3}
+          sx={{
+            p: { xs: 1.5, md: 3 },
+            borderRadius: 4,
+            boxShadow: '0 4px 24px rgba(16,185,129,0.10)',
+            background: '#fff',
+            maxWidth: 600,
+            mx: 'auto',
+            mb: 4,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: { xs: '100%', md: 500 },
+          }}
+        >
+          <form onSubmit={handleSubmit} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              error={!!error}
+              helperText={error}
+              placeholder="Rechercher une page Facebook…"
+              sx={{
+                bgcolor: '#FFFFFF',
+                borderRadius: 8,
+                '& .MuiOutlinedInput-root': {
                   borderRadius: 8,
-                  '& .MuiOutlinedInput-root': {
-                    borderRadius: 8,
-                    fontSize: { xs: 18, md: 22 },
-                    fontWeight: 500,
-                    color: '#1F2937',
-                    background: '#FFFFFF',
-                    boxShadow: 'none',
-                    height: { xs: 52, md: 68 },
-                  },
-                  '& .MuiInputBase-input': {
-                    py: { xs: 1.5, md: 2.5 },
-                    px: { xs: 1.5, md: 2.5 },
-                  },
-                  mr: { xs: 1, md: 2.5 },
-                }}
-                InputLabelProps={{ sx: { fontWeight: 600, color: '#10B981' } }}
-                inputProps={{ style: { fontSize: 18, color: '#1F2937' } }}
-              />
-              <Button
-                type="submit"
-                variant="contained"
-                size="large"
-                sx={{
-                  minWidth: { xs: 48, md: 72 },
-                  minHeight: { xs: 48, md: 72 },
-                  width: { xs: 48, md: 72 },
-                  height: { xs: 48, md: 72 },
-                  borderRadius: '50%',
-                  background: '#10B981',
-                  color: '#FFFFFF',
-                  boxShadow: '0 2px 8px rgba(16,185,129,0.10)',
-                  ml: { xs: 0.5, md: 1 },
-                  p: 0,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  transition: 'background 0.2s, box-shadow 0.2s',
-                  '&:hover': {
-                    background: '#059669',
-                    boxShadow: '0 4px 16px rgba(16,185,129,0.18)',
-                  },
-                }}
-                disabled={loading}
-              >
-                <SearchIcon sx={{ fontSize: { xs: 28, md: 38 } }} />
-              </Button>
-            </form>
-          </Paper>
-        </Container>
-      </Box>
-
-      {/* Features Section */}
-      <Container maxWidth="md">
-        <Grid container spacing={3} sx={{ mt: { xs: 1, md: 5 } }}>
-          <Grid item xs={12} md={4}>
-            <Paper
-              elevation={0}
+                  fontSize: { xs: 20, md: 24 },
+                  fontWeight: 500,
+                  color: '#1F2937',
+                  background: '#FFFFFF',
+                  boxShadow: 'none',
+                  height: { xs: 56, md: 68 },
+                },
+                '& .MuiInputBase-input': {
+                  py: { xs: 2, md: 2.5 },
+                  px: { xs: 2, md: 2.5 },
+                },
+                mr: { xs: 1, md: 2.5 },
+              }}
+              InputLabelProps={{ sx: { fontWeight: 600, color: '#10B981' } }}
+              inputProps={{ style: { fontSize: 20, color: '#1F2937' } }}
+            />
+            <Button
+              type="submit"
+              variant="contained"
+              size="large"
               sx={{
-                p: { xs: 2, md: 4 },
-                height: '100%',
-                textAlign: 'center',
-                borderRadius: 4,
-                boxShadow: '0 4px 16px rgba(16,185,129,0.07)',
-                background: '#FFFFFF',
-                transition: 'box-shadow 0.2s',
-                mb: { xs: 2, md: 0 },
+                minWidth: { xs: 52, md: 72 },
+                minHeight: { xs: 52, md: 72 },
+                width: { xs: 52, md: 72 },
+                height: { xs: 52, md: 72 },
+                borderRadius: '50%',
+                background: '#10B981',
+                color: '#FFFFFF',
+                boxShadow: '0 2px 8px rgba(16,185,129,0.10)',
+                ml: { xs: 0.5, md: 1 },
+                p: 0,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                transition: 'background 0.2s, box-shadow 0.2s',
                 '&:hover': {
-                  boxShadow: '0 8px 32px rgba(16,185,129,0.13)',
-                  background: '#FDE68A',
+                  background: '#059669',
+                  boxShadow: '0 4px 16px rgba(16,185,129,0.18)',
                 },
               }}
+              disabled={loading}
             >
-              <Typography variant="h6" gutterBottom sx={{ fontWeight: 700, color: '#10B981', fontSize: 18 }}>
-                Avis Vérifiés
-              </Typography>
-              <Typography color="text.secondary" sx={{ fontSize: 15, fontWeight: 500, color: '#1F2937' }}>
-                Tous les avis sont vérifiés et proviennent d'utilisateurs authentiques
-              </Typography>
+              <SearchIcon sx={{ fontSize: { xs: 32, md: 38 } }} />
+            </Button>
+          </form>
+        </Paper>
+        <Grid container spacing={2} sx={{ mt: 1 }}>
+          <Grid item xs={12} sm={4}>
+            <Paper elevation={2} sx={{ p: 2, borderRadius: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', bgcolor: '#fff', boxShadow: '0 2px 8px rgba(16,185,129,0.07)' }}>
+              <CheckCircleIcon sx={{ color: '#10B981', fontSize: 32, mb: 1 }} />
+              <Typography sx={{ fontWeight: 700, fontSize: 16, color: '#1F2937', mb: 0.5 }}>Avis vérifiés</Typography>
+              <Typography sx={{ fontSize: 14, color: '#6B7280', textAlign: 'center' }}>Des avis authentiques pour chaque page.</Typography>
             </Paper>
           </Grid>
-          <Grid item xs={12} md={4}>
-            <Paper
-              elevation={0}
-              sx={{
-                p: { xs: 2, md: 4 },
-                height: '100%',
-                textAlign: 'center',
-                borderRadius: 4,
-                boxShadow: '0 4px 16px rgba(16,185,129,0.07)',
-                background: '#FFFFFF',
-                transition: 'box-shadow 0.2s',
-                mb: { xs: 2, md: 0 },
-                '&:hover': {
-                  boxShadow: '0 8px 32px rgba(16,185,129,0.13)',
-                  background: '#FDE68A',
-                },
-              }}
-            >
-              <Typography variant="h6" gutterBottom sx={{ fontWeight: 700, color: '#10B981', fontSize: 18 }}>
-                Communauté Active
-              </Typography>
-              <Typography color="text.secondary" sx={{ fontSize: 15, fontWeight: 500, color: '#1F2937' }}>
-                Une communauté active d'utilisateurs partageant leurs expériences
-              </Typography>
+          <Grid item xs={12} sm={4}>
+            <Paper elevation={2} sx={{ p: 2, borderRadius: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', bgcolor: '#fff', boxShadow: '0 2px 8px rgba(16,185,129,0.07)' }}>
+              <GroupsIcon sx={{ color: '#2563EB', fontSize: 32, mb: 1 }} />
+              <Typography sx={{ fontWeight: 700, fontSize: 16, color: '#1F2937', mb: 0.5 }}>Communauté active</Typography>
+              <Typography sx={{ fontSize: 14, color: '#6B7280', textAlign: 'center' }}>Partage d'expériences réelles.</Typography>
             </Paper>
           </Grid>
-          <Grid item xs={12} md={4}>
-            <Paper
-              elevation={0}
-              sx={{
-                p: { xs: 2, md: 4 },
-                height: '100%',
-                textAlign: 'center',
-                borderRadius: 4,
-                boxShadow: '0 4px 16px rgba(16,185,129,0.07)',
-                background: '#FFFFFF',
-                transition: 'box-shadow 0.2s',
-                mb: { xs: 2, md: 0 },
-                '&:hover': {
-                  boxShadow: '0 8px 32px rgba(16,185,129,0.13)',
-                  background: '#FDE68A',
-                },
-              }}
-            >
-              <Typography variant="h6" gutterBottom sx={{ fontWeight: 700, color: '#10B981', fontSize: 18 }}>
-                Gratuit
-              </Typography>
-              <Typography color="text.secondary" sx={{ fontSize: 15, fontWeight: 500, color: '#1F2937' }}>
-                Service entièrement gratuit pour tous les utilisateurs
-              </Typography>
+          <Grid item xs={12} sm={4}>
+            <Paper elevation={2} sx={{ p: 2, borderRadius: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', bgcolor: '#fff', boxShadow: '0 2px 8px rgba(16,185,129,0.07)' }}>
+              <AttachMoneyIcon sx={{ color: '#059669', fontSize: 32, mb: 1 }} />
+              <Typography sx={{ fontWeight: 700, fontSize: 16, color: '#1F2937', mb: 0.5 }}>Gratuit</Typography>
+              <Typography sx={{ fontSize: 14, color: '#6B7280', textAlign: 'center' }}>Aucun frais, accès libre.</Typography>
             </Paper>
           </Grid>
         </Grid>
