@@ -432,7 +432,7 @@ const PageReviews = () => {
             </Typography>
             {userReview && (
               <Box sx={{ mb: 1 }}>
-                <Rating value={userReview.rating} readOnly sx={{ mb: 1, fontSize: 28, color: getStarColor(userReview.rating) }} />
+                <Rating value={userReview.rating} readOnly sx={{ mb: 1, fontSize: 28, color: '#FFD600' }} />
                 <Typography variant="body2" sx={{ mb: 1, fontSize: 17, color: '#1F2937' }}>{userReview.comment}</Typography>
               </Box>
             )}
@@ -447,7 +447,7 @@ const PageReviews = () => {
                 value={rating}
                 onChange={(_, newValue) => setRating(newValue || 0)}
                 size="large"
-                sx={{ mb: 2, fontSize: 32, color: getStarColor(rating) }}
+                sx={{ mb: 2, fontSize: 32, color: '#FFD600' }}
               />
               <TextField
                 fullWidth
@@ -508,7 +508,7 @@ const PageReviews = () => {
                       </Typography>
                     </Box>
                   </Box>
-                  <Rating value={review.rating} readOnly sx={{ mb: 1, fontSize: 28, color: getStarColor(review.rating) }} />
+                  <Rating value={review.rating} readOnly sx={{ mb: 1, fontSize: 28, color: '#FFD600' }} />
                   <Typography variant="body1" sx={{ mb: 2, fontSize: 18, color: '#1F2937', fontWeight: 500 }}>
                     {review.comment}
                   </Typography>
@@ -520,7 +520,7 @@ const PageReviews = () => {
                           <Rating
                             value={editRating}
                             onChange={(_, newValue) => setEditRating(newValue || 0)}
-                            sx={{ mb: 1, fontSize: 28, color: getStarColor(editRating) }}
+                            sx={{ mb: 1, fontSize: 28, color: '#FFD600' }}
                           />
                           <TextField
                             fullWidth
