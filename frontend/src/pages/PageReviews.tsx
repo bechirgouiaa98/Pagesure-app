@@ -312,29 +312,37 @@ const PageReviews = () => {
   return (
     <Container maxWidth="lg" sx={{ py: { xs: 2, md: 5 } }}>
       {/* Header: compact business info */}
-      <Grid container spacing={2} alignItems="center" sx={{ mb: 2, flexWrap: 'wrap' }}>
+      <Grid container spacing={2} alignItems="center" sx={{ mb: 2, flexWrap: 'wrap', justifyContent: 'center' }}>
         <Grid item xs={12} md={7}>
-          <Box display="flex" alignItems="center" gap={2} flexDirection={{ xs: 'column', md: 'row' }}>
+          <Box display="flex" flexDirection="column" alignItems="center" gap={1}>
             <Avatar
               src={pageData.profilePictureUrl || undefined}
               alt={pageData.title}
-              sx={{ width: { xs: 56, md: 80 }, height: { xs: 56, md: 80 }, boxShadow: 3, border: '3px solid #fff', background: '#fff', borderRadius: 3, mb: { xs: 1, md: 0 } }}
+              sx={{
+                width: { xs: 110, md: 140 },
+                height: { xs: 110, md: 140 },
+                boxShadow: 4,
+                border: '4px solid #fff',
+                background: '#fff',
+                borderRadius: '50%',
+                mb: 1,
+                mx: 'auto',
+                display: 'block',
+              }}
             />
-            <Box textAlign={{ xs: 'center', md: 'left' }}>
-              <Typography variant="h4" sx={{ fontWeight: 800, mb: 0.2, letterSpacing: 0.2, color: '#10B981', fontSize: { xs: 20, md: 32 } }}>
-                {pageData.title}
+            <Typography variant="h3" sx={{ fontWeight: 900, mb: 1, letterSpacing: 0.5, color: '#10B981', fontSize: { xs: 30, md: 40 }, textAlign: 'center' }}>
+              {pageData.title}
+            </Typography>
+            <Typography variant="subtitle1" sx={{ fontSize: { xs: 20, md: 24 }, fontWeight: 600, color: '#1F2937', mt: 0.5, textAlign: 'center', mb: 0.5 }}>
+              {typeof pageData.likes === 'number' && `Likes ${formatNumber(pageData.likes)}`}
+              {typeof pageData.likes === 'number' && typeof pageData.followers === 'number' && ' • '}
+              {typeof pageData.followers === 'number' && `Followers ${formatNumber(pageData.followers)}`}
+            </Typography>
+            {Array.isArray(pageData.categories) && pageData.categories.length > 1 && (
+              <Typography variant="subtitle2" sx={{ fontSize: { xs: 18, md: 20 }, fontWeight: 500, color: '#6B7280', mt: 0.5, textAlign: 'center' }}>
+                {pageData.categories[1]}
               </Typography>
-              <Typography variant="subtitle2" sx={{ fontSize: { xs: 14, md: 16 }, fontWeight: 500, color: '#1F2937', mt: 0.2 }}>
-                {typeof pageData.likes === 'number' && `Likes ${formatNumber(pageData.likes)}`}
-                {typeof pageData.likes === 'number' && typeof pageData.followers === 'number' && ' • '}
-                {typeof pageData.followers === 'number' && `Followers ${formatNumber(pageData.followers)}`}
-              </Typography>
-              {Array.isArray(pageData.categories) && pageData.categories.length > 1 && (
-                <Typography variant="caption" sx={{ fontSize: { xs: 13, md: 15 }, fontWeight: 400, color: '#6B7280', mt: 0.2 }}>
-                  {pageData.categories[1]}
-                </Typography>
-              )}
-            </Box>
+            )}
           </Box>
         </Grid>
         <Grid item xs={12} md={5}>
