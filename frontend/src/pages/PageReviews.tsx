@@ -319,10 +319,10 @@ const PageReviews = () => {
               src={pageData.profilePictureUrl || undefined}
               alt={pageData.title}
               sx={{
-                width: { xs: 110, md: 140 },
-                height: { xs: 110, md: 140 },
-                boxShadow: 4,
-                border: '4px solid #fff',
+                width: { xs: 140, md: 160 },
+                height: { xs: 140, md: 160 },
+                boxShadow: 5,
+                border: '5px solid #fff',
                 background: '#fff',
                 borderRadius: '50%',
                 mb: 1,
@@ -330,16 +330,16 @@ const PageReviews = () => {
                 display: 'block',
               }}
             />
-            <Typography variant="h3" sx={{ fontWeight: 900, mb: 1, letterSpacing: 0.5, color: '#10B981', fontSize: { xs: 30, md: 40 }, textAlign: 'center' }}>
+            <Typography variant="h3" sx={{ fontWeight: 900, mb: 1, letterSpacing: 0.5, color: '#10B981', fontSize: { xs: 36, md: 44 }, textAlign: 'center' }}>
               {pageData.title}
             </Typography>
-            <Typography variant="subtitle1" sx={{ fontSize: { xs: 20, md: 24 }, fontWeight: 600, color: '#1F2937', mt: 0.5, textAlign: 'center', mb: 0.5 }}>
+            <Typography variant="subtitle1" sx={{ fontSize: { xs: 24, md: 28 }, fontWeight: 700, color: '#1F2937', mt: 0.5, textAlign: 'center', mb: 0.5 }}>
               {typeof pageData.likes === 'number' && `Likes ${formatNumber(pageData.likes)}`}
               {typeof pageData.likes === 'number' && typeof pageData.followers === 'number' && ' • '}
               {typeof pageData.followers === 'number' && `Followers ${formatNumber(pageData.followers)}`}
             </Typography>
             {Array.isArray(pageData.categories) && pageData.categories.length > 1 && (
-              <Typography variant="subtitle2" sx={{ fontSize: { xs: 18, md: 20 }, fontWeight: 500, color: '#6B7280', mt: 0.5, textAlign: 'center' }}>
+              <Typography variant="subtitle2" sx={{ fontSize: { xs: 22, md: 24 }, fontWeight: 600, color: '#6B7280', mt: 0.5, textAlign: 'center' }}>
                 {pageData.categories[1]}
               </Typography>
             )}
