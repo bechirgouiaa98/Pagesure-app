@@ -11,7 +11,7 @@ TASK_ID = "bechir.gouiaa98/facebook-pages-scraper-task"
 
 def scrape_facebook_data(url):
     client = ApifyClient(APIFY_TOKEN)
-    run = client.task(TASK_ID).call(task_input={"startUrls": [{"url": url}]})
+    un = client.task(TASK_ID).call(task_input={"startUrls": [{"url": url}]}, timeout_secs=120)
     items = list(client.dataset(run["defaultDatasetId"]).iterate_items())
     if not items:
         return {"error": "No data found"}
