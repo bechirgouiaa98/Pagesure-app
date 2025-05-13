@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app, origins=['https://pagesure-frontend-app.onrender.com'])
 
 APIFY_TOKEN = os.environ.get("APIFY_TOKEN") or "YOUR_APIFY_TOKEN"  # Replace with your token or set in Render
-TASK_ID = "bechir.gouiaa98/facebook-scraper-task"
+TASK_ID = "bechir.gouiaa98/facebook-pages-scraper-task"
 
 def scrape_facebook_data(url):
     client = ApifyClient(APIFY_TOKEN)
