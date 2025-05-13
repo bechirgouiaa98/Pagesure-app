@@ -106,83 +106,91 @@ const Home = () => {
       }}
     >
       <Container maxWidth="sm" sx={{ textAlign: 'center', px: { xs: 0.5, md: 0 } }}>
-        <Paper
-          elevation={3}
+        <Typography
+          variant="h1"
           sx={{
-            p: { xs: 1.5, md: 3 },
-            borderRadius: 4,
-            boxShadow: '0 4px 24px rgba(16,185,129,0.10)',
-            background: '#fff',
-            maxWidth: 600,
-            mx: 'auto',
-            mb: 4,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: { xs: '100%', md: 500 },
+            fontWeight: 900,
+            fontSize: { xs: '2.2rem', md: '3.2rem' },
+            letterSpacing: 0.5,
+            mb: 1.5,
+            color: '#1F2937',
+            lineHeight: 1.13,
+            mt: 2,
           }}
         >
-          <form onSubmit={handleSubmit} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              value={url}
-              onChange={(e) => setUrl(e.target.value)}
-              error={!!error}
-              helperText={error}
-              placeholder="Rechercher une page Facebook…"
-              sx={{
-                bgcolor: '#FFFFFF',
+          Achetez en confiance.
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          sx={{ mb: 4, color: '#10B981', fontWeight: 500, fontSize: { xs: 16, md: 22 }, opacity: 0.95, lineHeight: 1.4 }}
+        >
+          Des avis réels.
+        </Typography>
+        <form onSubmit={handleSubmit} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto', maxWidth: 500 }}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            error={!!error}
+            helperText={error}
+            placeholder="Rechercher une page Facebook…"
+            sx={{
+              bgcolor: '#FFFFFF',
+              borderRadius: 8,
+              boxShadow: '0 2px 8px rgba(16,185,129,0.10)',
+              fontSize: { xs: 20, md: 24 },
+              fontWeight: 500,
+              color: '#1F2937',
+              height: { xs: 56, md: 68 },
+              '& .MuiOutlinedInput-root': {
                 borderRadius: 8,
-                '& .MuiOutlinedInput-root': {
-                  borderRadius: 8,
-                  fontSize: { xs: 20, md: 24 },
-                  fontWeight: 500,
-                  color: '#1F2937',
-                  background: '#FFFFFF',
-                  boxShadow: 'none',
-                  height: { xs: 56, md: 68 },
-                },
-                '& .MuiInputBase-input': {
-                  py: { xs: 2, md: 2.5 },
-                  px: { xs: 2, md: 2.5 },
-                },
-                mr: { xs: 1, md: 2.5 },
-              }}
-              InputLabelProps={{ sx: { fontWeight: 600, color: '#10B981' } }}
-              inputProps={{ style: { fontSize: 20, color: '#1F2937' } }}
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              size="large"
-              sx={{
-                minWidth: { xs: 52, md: 72 },
-                minHeight: { xs: 52, md: 72 },
-                width: { xs: 52, md: 72 },
-                height: { xs: 52, md: 72 },
-                borderRadius: '50%',
-                background: '#10B981',
-                color: '#FFFFFF',
-                boxShadow: '0 2px 8px rgba(16,185,129,0.10)',
-                ml: { xs: 0.5, md: 1 },
-                p: 0,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                transition: 'background 0.2s, box-shadow 0.2s',
-                '&:hover': {
-                  background: '#059669',
-                  boxShadow: '0 4px 16px rgba(16,185,129,0.18)',
-                },
-              }}
-              disabled={loading}
-            >
-              <SearchIcon sx={{ fontSize: { xs: 32, md: 38 } }} />
-            </Button>
-          </form>
-        </Paper>
-        <Grid container spacing={2} sx={{ mt: 1 }}>
+                fontSize: { xs: 20, md: 24 },
+                fontWeight: 500,
+                color: '#1F2937',
+                background: '#FFFFFF',
+                boxShadow: 'none',
+                height: { xs: 56, md: 68 },
+              },
+              '& .MuiInputBase-input': {
+                py: { xs: 2, md: 2.5 },
+                px: { xs: 2, md: 2.5 },
+              },
+              mr: { xs: 1, md: 2.5 },
+            }}
+            InputLabelProps={{ sx: { fontWeight: 600, color: '#10B981' } }}
+            inputProps={{ style: { fontSize: 20, color: '#1F2937' } }}
+          />
+          <Button
+            type="submit"
+            variant="contained"
+            size="large"
+            sx={{
+              minWidth: { xs: 52, md: 72 },
+              minHeight: { xs: 52, md: 72 },
+              width: { xs: 52, md: 72 },
+              height: { xs: 52, md: 72 },
+              borderRadius: '50%',
+              background: '#10B981',
+              color: '#FFFFFF',
+              boxShadow: '0 2px 8px rgba(16,185,129,0.10)',
+              ml: { xs: 0.5, md: 1 },
+              p: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'background 0.2s, box-shadow 0.2s',
+              '&:hover': {
+                background: '#059669',
+                boxShadow: '0 4px 16px rgba(16,185,129,0.18)',
+              },
+            }}
+            disabled={loading}
+          >
+            <SearchIcon sx={{ fontSize: { xs: 32, md: 38 } }} />
+          </Button>
+        </form>
+        <Grid container spacing={2} sx={{ mt: 2 }}>
           <Grid item xs={12} sm={4}>
             <Paper elevation={2} sx={{ p: 2, borderRadius: 3, display: 'flex', flexDirection: 'column', alignItems: 'center', bgcolor: '#fff', boxShadow: '0 2px 8px rgba(16,185,129,0.07)' }}>
               <CheckCircleIcon sx={{ color: '#10B981', fontSize: 32, mb: 1 }} />
