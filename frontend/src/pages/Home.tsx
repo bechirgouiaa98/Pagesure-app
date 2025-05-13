@@ -96,25 +96,26 @@ const Home = () => {
       <Box
         sx={{
           bgcolor: '#FFFFFF',
-          py: { xs: 10, md: 16 },
-          mb: { xs: 2, md: 4 },
+          py: { xs: 4, md: 12 },
+          mb: { xs: 1, md: 4 },
           borderRadius: 0,
           boxShadow: '0 2px 16px rgba(16,185,129,0.07)',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          px: { xs: 1, md: 0 },
         }}
       >
-        <Container maxWidth="sm" sx={{ textAlign: 'center' }}>
+        <Container maxWidth="sm" sx={{ textAlign: 'center', px: { xs: 0.5, md: 0 } }}>
           <Typography
             variant="h1"
             component="h1"
             gutterBottom
             sx={{
               fontWeight: 900,
-              fontSize: { xs: '2.7rem', md: '3.8rem' },
+              fontSize: { xs: '2.1rem', md: '3.8rem' },
               letterSpacing: 0.5,
-              mb: 3.5,
+              mb: 2,
               color: '#1F2937',
               lineHeight: 1.13,
             }}
@@ -123,7 +124,7 @@ const Home = () => {
           </Typography>
           <Typography
             variant="h5"
-            sx={{ mb: 7, color: '#10B981', fontWeight: 400, fontSize: { xs: 18, md: 24 }, opacity: 0.95, lineHeight: 1.4 }}
+            sx={{ mb: 4, color: '#10B981', fontWeight: 400, fontSize: { xs: 16, md: 24 }, opacity: 0.95, lineHeight: 1.4 }}
           >
             la référence des avis sur les pages Facebook
           </Typography>
@@ -140,6 +141,7 @@ const Home = () => {
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
+              width: { xs: '100%', md: 500 },
             }}
           >
             <form onSubmit={handleSubmit} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 0 }}>
@@ -156,36 +158,36 @@ const Home = () => {
                   borderRadius: 8,
                   '& .MuiOutlinedInput-root': {
                     borderRadius: 8,
-                    fontSize: 22,
+                    fontSize: { xs: 18, md: 22 },
                     fontWeight: 500,
                     color: '#1F2937',
                     background: '#FFFFFF',
                     boxShadow: 'none',
-                    height: 68,
+                    height: { xs: 52, md: 68 },
                   },
                   '& .MuiInputBase-input': {
-                    py: 2.5,
-                    px: 2.5,
+                    py: { xs: 1.5, md: 2.5 },
+                    px: { xs: 1.5, md: 2.5 },
                   },
-                  mr: 2.5,
+                  mr: { xs: 1, md: 2.5 },
                 }}
                 InputLabelProps={{ sx: { fontWeight: 600, color: '#10B981' } }}
-                inputProps={{ style: { fontSize: 22, color: '#1F2937' } }}
+                inputProps={{ style: { fontSize: 18, color: '#1F2937' } }}
               />
               <Button
                 type="submit"
                 variant="contained"
                 size="large"
                 sx={{
-                  minWidth: 72,
-                  minHeight: 72,
-                  width: 72,
-                  height: 72,
+                  minWidth: { xs: 48, md: 72 },
+                  minHeight: { xs: 48, md: 72 },
+                  width: { xs: 48, md: 72 },
+                  height: { xs: 48, md: 72 },
                   borderRadius: '50%',
                   background: '#10B981',
                   color: '#FFFFFF',
                   boxShadow: '0 2px 8px rgba(16,185,129,0.10)',
-                  ml: 1,
+                  ml: { xs: 0.5, md: 1 },
                   p: 0,
                   display: 'flex',
                   alignItems: 'center',
@@ -198,7 +200,7 @@ const Home = () => {
                 }}
                 disabled={loading}
               >
-                <SearchIcon sx={{ fontSize: 38 }} />
+                <SearchIcon sx={{ fontSize: { xs: 28, md: 38 } }} />
               </Button>
             </form>
           </Paper>
@@ -207,28 +209,29 @@ const Home = () => {
 
       {/* Features Section */}
       <Container maxWidth="md">
-        <Grid container spacing={4} sx={{ mt: { xs: 2, md: 5 } }}>
+        <Grid container spacing={3} sx={{ mt: { xs: 1, md: 5 } }}>
           <Grid item xs={12} md={4}>
             <Paper
               elevation={0}
               sx={{
-                p: { xs: 2.5, md: 4 },
+                p: { xs: 2, md: 4 },
                 height: '100%',
                 textAlign: 'center',
                 borderRadius: 4,
                 boxShadow: '0 4px 16px rgba(16,185,129,0.07)',
                 background: '#FFFFFF',
                 transition: 'box-shadow 0.2s',
+                mb: { xs: 2, md: 0 },
                 '&:hover': {
                   boxShadow: '0 8px 32px rgba(16,185,129,0.13)',
                   background: '#FDE68A',
                 },
               }}
             >
-              <Typography variant="h6" gutterBottom sx={{ fontWeight: 700, color: '#10B981', fontSize: 20 }}>
+              <Typography variant="h6" gutterBottom sx={{ fontWeight: 700, color: '#10B981', fontSize: 18 }}>
                 Avis Vérifiés
               </Typography>
-              <Typography color="text.secondary" sx={{ fontSize: 16, fontWeight: 500, color: '#1F2937' }}>
+              <Typography color="text.secondary" sx={{ fontSize: 15, fontWeight: 500, color: '#1F2937' }}>
                 Tous les avis sont vérifiés et proviennent d'utilisateurs authentiques
               </Typography>
             </Paper>
@@ -237,23 +240,24 @@ const Home = () => {
             <Paper
               elevation={0}
               sx={{
-                p: { xs: 2.5, md: 4 },
+                p: { xs: 2, md: 4 },
                 height: '100%',
                 textAlign: 'center',
                 borderRadius: 4,
                 boxShadow: '0 4px 16px rgba(16,185,129,0.07)',
                 background: '#FFFFFF',
                 transition: 'box-shadow 0.2s',
+                mb: { xs: 2, md: 0 },
                 '&:hover': {
                   boxShadow: '0 8px 32px rgba(16,185,129,0.13)',
                   background: '#FDE68A',
                 },
               }}
             >
-              <Typography variant="h6" gutterBottom sx={{ fontWeight: 700, color: '#10B981', fontSize: 20 }}>
+              <Typography variant="h6" gutterBottom sx={{ fontWeight: 700, color: '#10B981', fontSize: 18 }}>
                 Communauté Active
               </Typography>
-              <Typography color="text.secondary" sx={{ fontSize: 16, fontWeight: 500, color: '#1F2937' }}>
+              <Typography color="text.secondary" sx={{ fontSize: 15, fontWeight: 500, color: '#1F2937' }}>
                 Une communauté active d'utilisateurs partageant leurs expériences
               </Typography>
             </Paper>
@@ -262,23 +266,24 @@ const Home = () => {
             <Paper
               elevation={0}
               sx={{
-                p: { xs: 2.5, md: 4 },
+                p: { xs: 2, md: 4 },
                 height: '100%',
                 textAlign: 'center',
                 borderRadius: 4,
                 boxShadow: '0 4px 16px rgba(16,185,129,0.07)',
                 background: '#FFFFFF',
                 transition: 'box-shadow 0.2s',
+                mb: { xs: 2, md: 0 },
                 '&:hover': {
                   boxShadow: '0 8px 32px rgba(16,185,129,0.13)',
                   background: '#FDE68A',
                 },
               }}
             >
-              <Typography variant="h6" gutterBottom sx={{ fontWeight: 700, color: '#10B981', fontSize: 20 }}>
+              <Typography variant="h6" gutterBottom sx={{ fontWeight: 700, color: '#10B981', fontSize: 18 }}>
                 Gratuit
               </Typography>
-              <Typography color="text.secondary" sx={{ fontSize: 16, fontWeight: 500, color: '#1F2937' }}>
+              <Typography color="text.secondary" sx={{ fontSize: 15, fontWeight: 500, color: '#1F2937' }}>
                 Service entièrement gratuit pour tous les utilisateurs
               </Typography>
             </Paper>
