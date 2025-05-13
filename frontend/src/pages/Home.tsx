@@ -118,13 +118,13 @@ const Home = () => {
             mt: 2,
           }}
         >
-          Achetez en confiance.
+          Achetez en confiance
         </Typography>
         <Typography
           variant="subtitle1"
           sx={{ mb: 4, color: '#10B981', fontWeight: 500, fontSize: { xs: 16, md: 22 }, opacity: 0.95, lineHeight: 1.4 }}
         >
-          Des avis réels.
+          Des avis réels
         </Typography>
         <form onSubmit={handleSubmit} style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto', maxWidth: 500 }}>
           <TextField
